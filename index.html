@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>漢字の書き方わからねぇ</title>
+<style>
+  /* 同梱フォント（fonts/YujiSyuku-Regular.ttf を置くと有効になる）。
+     PCにインストール済みならそちらを使う。ネット接続は不要。 */
+  @font-face {
+    font-family: "Fude";
+    src: local("Yuji Syuku"),
+         url("fonts/YujiSyuku-Regular.ttf") format("truetype");
+    font-display: swap;
+  }
+  /* 筆字系: 同梱/インストール済みのYuji Syuku → Windowsの行書体 → 明朝系 */
+  :root {
+    --fude-fonts: "Fude", "HGP行書体", "HG行書体", "AR P行書体",
+                  "Hiragino Mincho ProN", "Yu Mincho", serif;
+  }
+  body {
+    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    margin: 0;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  h1 {
+    font-family: var(--fude-fonts);
+    font-size: 36px;
+    margin: 0 0 30px;
+  }
+  #textInput {
+    font-size: 20px;
+    padding: 8px 12px;
+    width: 20em;
+    max-width: 90%;
+  }
+  #fontSizeSelect {
+    font-size: 18px;
+    padding: 6px 10px;
+    margin-left: 10px;
+  }
+  #display {
+    font-family: var(--fude-fonts);
+    margin-top: 40px;
+    font-size: 70pt;
+    line-height: 1.2;
+    word-break: break-all;
+    min-height: 1.2em;
+  }
+</style>
+</head>
+<body>
+  <h1>漢字の書き方わからねぇ</h1>
+  <input type="text" id="textInput" maxlength="20" placeholder="日本語を入力してください">
+  <select id="fontSizeSelect">
+    <option value="30">30pt</option>
+    <option value="50">50pt</option>
+    <option value="70" selected>70pt</option>
+    <option value="100">100pt</option>
+    <option value="150">150pt</option>
+    <option value="200">200pt</option>
+  </select>
+  <div id="display"></div>
+
+  <script>
+    const input = document.getElementById("textInput");
+    const display = document.getElementById("display");
+    const fontSizeSelect = document.getElementById("fontSizeSelect");
+
+    input.addEventListener("input", () => {
+      display.textContent = input.value;
+    });
+
+    fontSizeSelect.addEventListener("change", () => {
+      display.style.fontSize = fontSizeSelect.value + "pt";
+    });
+  </script>
+</body>
+</html>
